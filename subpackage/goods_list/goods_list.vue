@@ -9,10 +9,7 @@
     data() {
       return {
         
-      }
-    },
-    methods: {
-      
+      };
     }
   }
 </script>
