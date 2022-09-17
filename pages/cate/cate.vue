@@ -1,5 +1,7 @@
 <template>
   <view>
+    <!-- 自定义绑定事件 -->
+    <mySearch @myclick="gotoSearch"></mySearch>
     <view class="scroll-view-container">
       <!-- 左侧滑动区域 -->
       <scroll-view scroll-y="true" :style="{height:wh+'px'}" class="left-scroll-view">
@@ -27,7 +29,12 @@
 </template>
 
 <script>
+  // 导入search组件
+  import mySearch from '@/uni_modules/my-search/components/my-search/my-search.vue'
   export default {
+    components:{
+      mySearch
+      },
     data() {
       return {
         // 可用的屏幕高度
@@ -76,6 +83,12 @@
       gotoGoodsList(item) {
         uni.navigateTo({
           url: '/subpackage/goods_list/goods_list?cid=' + item.cat_id
+        })
+      },
+
+      gotoSearch(){
+        uni.navigateTo({
+          url:'/subpackage/search/search'
         })
       }
 

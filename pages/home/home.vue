@@ -1,5 +1,9 @@
 <template>
   <view>
+    <!-- 搜索组件 -->
+    <view class="search-box">
+      <!-- <my-search @myclick="gotoSearch"></my-search> -->
+    </view>
     <!-- 轮播图区域 -->
     <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" circular="true">
       <swiper-item v-for="(item,i) in swiperList" :key="i">
@@ -40,11 +44,11 @@
 </template>
 
 <script>
-  // import {
-  //   $http
-  // } from '@escook/request-miniprogram'
-  // uni.$http = $http
+import mySearch from '@/uni_modules/my-search/components/my-search/my-search.vue'
   export default {
+    components:{
+      mySearch
+    },
     data() {
       return {
         // 轮播图数据
@@ -113,6 +117,11 @@
         console.log(this.floorList);
        
       },
+      gotoSearch(){
+        uni.navigateTo({
+          url:'/subpackage/search/search'
+        })
+      }
     }
   }
 </script>
@@ -152,5 +161,10 @@
   
   .floor-img-box{
     display: flex;
+  }
+  .search-box {
+    position: sticky;
+    top: 0;
+    z-index: 999;
   }
 </style>
