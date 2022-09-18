@@ -1,6 +1,6 @@
 <template>
   <view>
-    
+    hi
   </view>
 </template>
 
