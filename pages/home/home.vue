@@ -1,9 +1,13 @@
 <template>
   <view>
+    <!-- 搜索组件 -->
+    <view class="search-box">
+      <my-search @myclick="gotoSearch"></my-search>
+    </view>
     <!-- 轮播图区域 -->
     <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" circular="true">
       <swiper-item v-for="(item,i) in swiperList" :key="i">
-        <navigator class="swiper-item" :url="'/subpackage/goods_detail/goods_detail?goods_id='+item.goods_id">
+        <navigator class="swiper-item" :url="'/subpak/goods_detail/goods_detail?goods_id='+item.goods_id">
           <image :src="item.image_src" />
         </navigator>
       </swiper-item>
@@ -40,11 +44,11 @@
 </template>
 
 <script>
-  // import {
-  //   $http
-  // } from '@escook/request-miniprogram'
-  // uni.$http = $http
+import mySearch from '@/uni_modules/my-search/components/my-search/my-search.vue'
   export default {
+    components:{
+      mySearch
+    },
     data() {
       return {
         // 轮播图数据
@@ -101,18 +105,23 @@
           data: res
         } = await uni.$http.get('/api/public/v1/home/floordata')
         if (res.meta.status !== 200) return uni.$showMsg()
-        // 传送过来的数据中，携带的跳转参数与我们建立的实际页面参数有误差（/pages=>/subpackage）
+        // 传送过来的数据中，携带的跳转参数与我们建立的实际页面参数有误差（/pages=>/subpak）
         // 所以先对数据进行处理
         res.message.forEach(floor=> {
           floor.product_list.forEach(prod=>{
             // 拿到商品，为其挂载自定义属性
-            prod.url = '/subpackage/goods_list/goods_list?'+prod.navigator_url.split('?')[1]
+            prod.url = '/subpak/goods_list/goods_list?'+prod.navigator_url.split('?')[1]
           })
         })
         this.floorList = res.message
         console.log(this.floorList);
        
       },
+      gotoSearch(){
+        uni.navigateTo({
+          url:'/subpak/search/search'
+        })
+      }
     }
   }
 </script>
@@ -152,5 +161,10 @@
   
   .floor-img-box{
     display: flex;
+  }
+  .search-box {
+    position: sticky;
+    top: 0;
+    z-index: 999;
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <view>
-    hi
+    list
   </view>
 </template>
 
@@ -9,10 +9,7 @@
     data() {
       return {
         
-      }
-    },
-    methods: {
-      
+      };
     }
   }
 </script>

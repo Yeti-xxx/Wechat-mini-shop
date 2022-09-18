@@ -34,12 +34,21 @@ export function createApp() {
   $http.baseUrl = 'https://api-hmugo-web.itheima.net'
   
   // $http.beforeRequest = function(options) {
+<<<<<<< HEAD
   //   // uni.showLoading({
   //   //   title: '数据加载中...',
   //   // })
   // }
 
   // 请求完成之后做一些事情
+=======
+  //   uni.showLoading({
+  //     title: '数据加载中...',
+  //   })
+  // }
+
+  // // 请求完成之后做一些事情
+>>>>>>> search
   // $http.afterRequest = function() {
   //   uni.hideLoading()
   // }
