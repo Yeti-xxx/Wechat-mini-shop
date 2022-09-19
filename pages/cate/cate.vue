@@ -82,10 +82,8 @@
       // 从三级列表跳转到商品列表
       gotoGoodsList(item) {
         uni.navigateTo({
-<<<<<<< HEAD
           // url: '/subpackage/goods_list/goods_list?cid=' + item.cat_id
-          url: '/subpackage/goods_list/goods_list'
-=======
+          // url: '/subpackage/goods_list/goods_list'
           url: '/subpak/goods_list/goods_list?cid=' + item.cat_id
         })
       },
@@ -93,7 +91,6 @@
       gotoSearch(){
         uni.navigateTo({
           url:'/subpak/search/search'
->>>>>>> search
         })
       }
 
