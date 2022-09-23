@@ -31,10 +31,12 @@
 <script>
   // 导入search组件
   import mySearch from '@/uni_modules/my-search/components/my-search/my-search.vue'
+  import badgeMix from '../../mixins/tabbar-badge.js'
   export default {
-    components:{
+    mixins:[badgeMix],
+    components: {
       mySearch
-      },
+    },
     data() {
       return {
         // 可用的屏幕高度
@@ -88,9 +90,9 @@
         })
       },
 
-      gotoSearch(){
+      gotoSearch() {
         uni.navigateTo({
-          url:'/subpak/search/search'
+          url: '/subpak/search/search'
         })
       }
 

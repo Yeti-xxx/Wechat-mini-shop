@@ -45,7 +45,9 @@
 
 <script>
 import mySearch from '@/uni_modules/my-search/components/my-search/my-search.vue'
+import badgeMix from '../../mixins/tabbar-badge.js'
   export default {
+    mixins:[badgeMix],
     components:{
       mySearch
     },

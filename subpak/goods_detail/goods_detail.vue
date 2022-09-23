@@ -35,7 +35,32 @@
 </template>
 
 <script>
+  import {
+    mapState,
+    mapMutations,
+    mapGetters
+  } from 'vuex' //引入mapState
+  import {
+    computed,
+    reactive,
+    watchEffect
+  } from "vue";
   export default {
+    computed: {
+      ...mapState('m_cart', ['cart']),
+      ...mapGetters('m_cart', ['total'])
+    },
+    watch: {
+      total: {
+        handler(newVal) {
+          const findResult = this.options.find(x => x.text === '购物车')
+          if (findResult) {
+            findResult.info = newVal
+          }
+        },
+        immediate: true
+      }
+    },
     data() {
       return {
         goods_info: {},
@@ -47,7 +72,7 @@
         }, {
           icon: 'cart',
           text: '购物车',
-          info: 2
+          info: 0
         }],
         buttonGroup: [{
             text: '加入购物车',
@@ -67,6 +92,7 @@
       this.getGoodsDetail(goods_id)
     },
     methods: {
+      ...mapMutations('m_cart', ['addToCart']),
       async getGoodsDetail(id) {
         const {
           data: res
@@ -87,21 +113,37 @@
           urls: this.goods_info.pics.map(x => x.pics_big)
         })
       },
-      onClick(e){
+      onClick(e) {
         if (e.content.text === '购物车') {
           uni.switchTab({
-            url:'/pages/cart/cart'
+            url: '/pages/cart/cart'
           })
         }
+      },
+      buttonClick(e) {
+        if (e.content.text === '加入购物车') {
+          const goods = {
+            goods_id: this.goods_info.goods_id, // 商品的Id
+            goods_name: this.goods_info.goods_name, // 商品的名称
+            goods_price: this.goods_info.goods_price, // 商品的价格
+            goods_count: 1, // 商品的数量
+            goods_small_logo: this.goods_info.goods_small_logo, // 商品的图片
+            goods_state: true // 商品的勾选状态
+          }
+          this.addToCart(goods)
+        }
       }
+
+
     }
   }
 </script>
 
 <style lang="scss">
-  .goods-detail-container{
+  .goods-detail-container {
     padding-bottom: 50px;
   }
+
   swiper {
     height: 750rpx;
     border-bottom: 1px solid #000;
@@ -150,8 +192,8 @@
     color: gray;
     margin: 10px 0;
   }
-  
-  .goods_nav{
+
+  .goods_nav {
     position: fixed;
     bottom: 0;
     left: 0;

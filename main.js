@@ -13,6 +13,7 @@ app.$mount()
 // #endif
 
 // #ifdef VUE3
+import store from '@/store/store.js'
 import {
   createSSRApp
 } from 'vue'
@@ -32,23 +33,9 @@ export function createApp() {
   }
   // 配置请求根路径
   $http.baseUrl = 'https://api-hmugo-web.itheima.net'
-  
-  // $http.beforeRequest = function(options) {
-  //   // uni.showLoading({
-  //   //   title: '数据加载中...',
-  //   // })
-  // }
 
-  // 请求完成之后做一些事情
-  //   uni.showLoading({
-  //     title: '数据加载中...',
-  //   })
-  // }
-  // // 请求完成之后做一些事情
-  // $http.afterRequest = function() {
-  //   uni.hideLoading()
-  // }
   const app = createSSRApp(App)
+  app.use(store)
   return {
     app
   }

@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Yeti-xxx/-#readme",
   "dependencies": {
     "@escook/request-miniprogram": "^0.2.1",
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "vuex": "^4.0.2"
   }
 }
