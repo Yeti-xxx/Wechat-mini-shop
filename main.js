@@ -31,8 +31,18 @@ export function createApp() {
       icon: 'none'
     })
   }
+
   // 配置请求根路径
   $http.baseUrl = 'https://api-hmugo-web.itheima.net'
+  $http.beforeRequest = function(options) {
+    // 判断当前请求的接口是否为有权限的接口
+    if (options.url.indexOf('/my') !== -1) {
+      options.header = {
+        // 从store中获取token
+        Authorization: store.state.m_user.token,
+      }
+    }
+  }
 
   const app = createSSRApp(App)
   app.use(store)
